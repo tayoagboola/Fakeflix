@@ -13,10 +13,11 @@ import Search from "./pages/Search/Search";
 import Category from "./pages/Category/Category";
 import DetailModal from "./components/DetailModal/DetailModal";
 import SplashAnimation from "./components/SplashAnimation/SplashAnimation";
-import PlayAnimation from "./components/PlayAnimation/PlayAnimation";
+//import PlayAnimation from "./components/PlayAnimation/PlayAnimation";
 import { selectCurrentUser } from './redux/auth/auth.selectors';
 import { selectSearchResults } from "./redux/search/search.selectors";
 import { checkUserSession } from "./redux/auth/auth.actions";
+import  PlayPage from "./pages/PlayPage/PlayPage";
 
 const App = () => {
 
@@ -51,7 +52,12 @@ const App = () => {
                     />
                     <Route
                         path="/play"
-                        component={PlayAnimation}
+                        render={() => currentUser
+                            ? <PlayPage />
+                            : <Redirect to="/login" />
+                        
+                        }
+                        //component={PlayAnimation}
                     />
                     <Route
                         path="/search"
@@ -64,7 +70,9 @@ const App = () => {
                         path="/browse"
                         render={() => currentUser
                             ? <Homepage />
-                            : <Redirect to="/login" />}
+                            : <Redirect to="/login" />
+                        
+                        }
                     />
                     <Route
                         exact
